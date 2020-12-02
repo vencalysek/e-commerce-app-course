@@ -2,8 +2,12 @@ import React, {Component} from "react";
 import "./App.css";
 
 // moduls
-import { Switch, Route } from 'react-router-dom';
+import {Switch, Route} from "react-router-dom";
 import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
+
+// redux imports
+import {connect} from "react-redux";
+import {setCurrentUser} from "./redux/user/user.actions";
 
 // components
 import HomePage from "./pages/homepage/Homepage";
@@ -12,17 +16,12 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import ShopPage from "./pages/shop/Shop";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   unsubscribeFromAuth = null;
-  
-  
+
   componentDidMount() {
+
+    const {setCurrentUser} = this.props
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // this.setState({currentUser: user})
       // console.log(user);
@@ -30,25 +29,23 @@ class App extends Component {
       // if userAuth exists -> user singedIn
       if (userAuth) {
         // in firebase.utils.js'createUserProfileDocument()' returns userRef, now we using that object here
-        //? take user object from db 
+        //? take user object from db
         const userRef = await createUserProfileDocument(userAuth);
 
         // taking DocumentSnapshot of userRef object
         userRef.onSnapshot(snapShot => {
-
           //? and save it to local state
           // seting up state, .data() methods give us a properies of object
-          this.setState({
+          setCurrentUser({
             currentUser: {
               id: snapShot.id,
-              ...snapShot.data()
-            }
-          }, () => console.log(this.state));
-          
+              ...snapShot.data(),
+            },
+          });
         });
       } else {
-          // if userAuth == null -> user signedOut, setState currentUser: null
-          this.setState({currentUser: userAuth})
+        // if userAuth == null -> user signedOut, setState currentUser: null
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -72,4 +69,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  // user.action function taking user as a argument, puting it into payload
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+});
+
+// first argument of connect is mapStateToProps function, as we dont need it here just pass null as first argument
+export default connect(null, mapDispatchToProps)(App);
