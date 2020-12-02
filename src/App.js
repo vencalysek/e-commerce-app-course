@@ -61,7 +61,7 @@ class App extends Component {
     return (
       <div>
         {/* currentUser props, to check if signIn or signOut */}
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
