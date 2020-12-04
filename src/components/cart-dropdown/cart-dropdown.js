@@ -20,11 +20,13 @@ const CartDropdown = ({cartItems}) => {
   );
 };
 
+// selecror
 // const mapStateToProps = state => ({
 //   cartItems: state.cart.cartItems
 // destructured cartItems
+
+// usinng memoized selector
 const mapStateToProps = state => ({
-  // cartItems: cartItems
   cartItems: selectCartItems(state)
 });
 
