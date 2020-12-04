@@ -7,7 +7,9 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
 // redux imports
 import {connect} from "react-redux";
+import {createStructuredSelector} from 'reselect'
 import {setCurrentUser} from "./redux/user/user.actions";
+import {selectCurrentUser} from './redux/user/user.selectors'
 
 // components
 import HomePage from "./pages/homepage/Homepage";
@@ -36,10 +38,8 @@ class App extends Component {
           //? and save it to local state
           // seting up state, .data() methods give us a properies of object
           setCurrentUser({
-            currentUser: {
               id: snapShot.id,
               ...snapShot.data(),
-            },
           });
         });
       } else {
@@ -71,8 +71,8 @@ class App extends Component {
 }
 
 // destructuring user from state
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector ({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

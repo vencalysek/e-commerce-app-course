@@ -1,6 +1,8 @@
 import React from "react";
 
+// redux
 import {connect} from "react-redux";
+import {createStructuredSelector} from 'reselect'
 import {selectCartItems} from "../../redux/cart/cart.selectors";
 
 import CartItem from "../cart-item/cart-item";
@@ -26,8 +28,8 @@ const CartDropdown = ({cartItems}) => {
 // destructured cartItems
 
 // usinng memoized selector
-const mapStateToProps = state => ({
-  cartItems: selectCartItems(state)
+const mapStateToProps = createStructuredSelector ({
+  cartItems: selectCartItems
 });
 
 export default connect(mapStateToProps)(CartDropdown);
