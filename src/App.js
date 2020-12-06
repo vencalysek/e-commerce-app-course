@@ -12,10 +12,11 @@ import {setCurrentUser} from "./redux/user/user.actions";
 import {selectCurrentUser} from './redux/user/user.selectors'
 
 // components
-import HomePage from "./pages/homepage/Homepage";
 import Header from "./components/header/Header";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
+import HomePage from "./pages/homepage/Homepage";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/Sign-in-and-sign-up";
 import ShopPage from "./pages/shop/Shop";
+import CheckoutPage from "./pages/checkout/Checkout";
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -64,6 +65,8 @@ class App extends Component {
 
           {/* if currentUser exist(is loggedin) redirect to homepage, else render sign in/up page */}
           <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+
+          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );

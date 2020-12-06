@@ -8,10 +8,10 @@ import {createStructuredSelector} from 'reselect';
 import {selectCartHidden} from '../../redux/cart/cart.selectors';
 import {selectCurrentUser} from '../../redux/user/user.selectors'
 
-import CartDropdown from "../cart-dropdown/cart-dropdown";
+import CartDropdown from "../cart-dropdown/Cart-dropdown";
 
 import {ReactComponent as Logo} from "../../assets/crown.svg";
-import CartIcon from "../cart-icon/cart-icon";
+import CartIcon from "../cart-icon/Cart-icon";
 import "./header.styles.scss";
 
 const Header = ({currentUser, hidden}) => {
