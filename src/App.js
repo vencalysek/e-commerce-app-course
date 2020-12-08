@@ -61,7 +61,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
 
           {/* if currentUser exist(is loggedin) redirect to homepage, else render sign in/up page */}
           <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
