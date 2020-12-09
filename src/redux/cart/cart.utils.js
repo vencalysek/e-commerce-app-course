@@ -8,16 +8,18 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     // if item already exist, add +1 to quantity
     return cartItems.map(cartItem =>
       cartItem.id === cartItemToAdd.id
+        // spread previous state of cartItem and increase quantity
         ? {...cartItem, quantity: cartItem.quantity + 1}
         : cartItem
     );
   }
-  // if item doesn't exist create new item in cart
+  // if item doesn't exist, spread prev state and create new item in cart
 
   return [...cartItems, {...cartItemToAdd, quantity: 1}];
 };
 
 // explanation to duplicite check id logic: .map is used to find "right" item on which to use quantity +1
+// ____________________________________________________
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id);
