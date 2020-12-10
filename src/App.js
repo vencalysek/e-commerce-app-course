@@ -14,7 +14,7 @@ import {selectCurrentUser} from './redux/user/user.selectors'
 // components
 import Header from "./components/header/Header";
 import HomePage from "./pages/homepage/Homepage";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/Sign-in-and-sign-up";
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/Sign-in-and-sign-up'
 import ShopPage from "./pages/shop/Shop";
 import CheckoutPage from "./pages/checkout/Checkout";
 
