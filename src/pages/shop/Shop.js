@@ -4,15 +4,15 @@ import CollectionsOverview from "../../components/collections-overview/Collectio
 import CollectionPage from "../collection/Collection";
 
 
-import "./shop.styles.scss";
+import {ShopPageContainer} from "./shop.styles";
 
 // match is automaticaly provided by router, cause Shop is rendered by router already
 const ShopPage = ({ match }) => {
   return (
-    <div className="shop-page">
+    <ShopPageContainer>
       <Route component={CollectionsOverview} exact path={`${match.path}`} />
       <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-    </div>
+    </ShopPageContainer>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import "./menu-item.styles.scss";
 import {withRouter} from "react-router-dom";
 
 import {
