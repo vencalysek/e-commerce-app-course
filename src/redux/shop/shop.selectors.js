@@ -9,7 +9,7 @@ export const selectCollections = createSelector([selectShop], shop => shop.colle
 // doing this move we taking values of shop.collections object, storing them in array: [{},{},{}...]. so we can map that array
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.values(collections)
+  collections => collections ? Object.values(collections) :  []
 )
 
 
@@ -19,8 +19,8 @@ export const selectCollectionsForPreview = createSelector(
 export const selectCollection = collectionUrlParam => (
   createSelector(
     [selectCollections], 
-    collections =>
-    collections[collectionUrlParam]
+    collections => collections ?
+    collections[collectionUrlParam] : null
   )
 );
 // f.e.: collections[hats] -> return value of hats object: {id: 1, title: "Hats", routeName: "hats", items: Array(9)}
