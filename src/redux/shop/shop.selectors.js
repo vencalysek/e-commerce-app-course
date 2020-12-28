@@ -9,18 +9,23 @@ export const selectCollections = createSelector([selectShop], shop => shop.colle
 // doing this move we taking values of shop.collections object, storing them in array: [{},{},{}...]. so we can map that array
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => collections ? Object.values(collections) :  []
-)
-
-
+  collections => (collections ? Object.values(collections) : [])
+);
 
 // shop.collections = {hats:{}, sneakers:{},...}
 // specifying collections[collectionUrlParam] we choose which object inside collections object we want to render
-export const selectCollection = collectionUrlParam => (
-  createSelector(
-    [selectCollections], 
-    collections => collections ?
-    collections[collectionUrlParam] : null
-  )
-);
+export const selectCollection = collectionUrlParam =>
+  createSelector([selectCollections], collections =>
+    collections ? collections[collectionUrlParam] : null
+  );
 // f.e.: collections[hats] -> return value of hats object: {id: 1, title: "Hats", routeName: "hats", items: Array(9)}
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
+
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+);
